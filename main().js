@@ -26,6 +26,12 @@ const drinks = {
         milk: 100,
         beans: 12,
         cost: 6
+    },
+    americano: {
+        water: 150,
+        milk: 25,
+        beans: 6,
+        cost: 3
     }
 }
 
@@ -48,6 +54,8 @@ function hasEnoughResources(choice) {
         drink = drinks.latte;
     } else if (choice === "3") {
         drink = drinks.cappuccino;
+    } else if (choice === "4") {
+        drink = drinks.americano;
     }
 
     if (machine.water < drink.water) {
@@ -70,7 +78,7 @@ function hasEnoughResources(choice) {
 
 
 function buy() {
-    const choice = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n");
+    const choice = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - americano:\n");
     if (!hasEnoughResources(choice)) {
         return
     }
@@ -92,6 +100,12 @@ function buy() {
         machine.water -= drinks.cappuccino.water;
         machine.milk -= drinks.cappuccino.milk;
         machine.beans -= drinks.cappuccino.beans;
+        machine.money += drinks.cappuccino.cost;
+    } else if (choice === "4") {
+        machine.cups--;
+        machine.water -= drinks.americano.water;
+        machine.milk -= drinks.americano.milk;
+        machine.beans -= drinks.americano.beans;
         machine.money += drinks.cappuccino.cost;
     }
 
