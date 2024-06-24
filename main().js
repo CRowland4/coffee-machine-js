@@ -1,13 +1,19 @@
 const input = require('sync-input')
 
+const amountPerCup = {
+    water: 200,
+    milk: 50,
+    beans: 15
+}
+
+
 function main() {
-    console.log("Starting to make a coffee");
-    console.log("Grinding coffee beans");
-    console.log("Boiling water");
-    console.log("Mixing boiled water with crushed coffee beans");
-    console.log("Pouring coffee into the cup");
-    console.log("Pouring some milk into the cup");
-    console.log("Coffee is ready!");
+    console.log("Write how many cups of coffee you will need:");
+    const cups = Number(input());
+    console.log(`For ${cups} cups of coffee you will need:`);
+    console.log(`${cups * amountPerCup.water} ml of water`);
+    console.log(`${cups * amountPerCup.milk} ml of milk`);
+    console.log(`${cups * amountPerCup.beans} g of coffee beans`);
 }
 
 main();
