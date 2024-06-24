@@ -40,8 +40,40 @@ function printResources() {
 }
 
 
+function hasEnoughResources(choice) {
+    let drink = drinks.latte;
+    if (choice === "1") {
+        drink = drinks.espresso;
+    } else if (choice === "2") {
+        drink = drinks.latte;
+    } else if (choice === "3") {
+        drink = drinks.cappuccino;
+    }
+
+    if (machine.water < drink.water) {
+        console.log("Sorry, not enough water!");
+        return false;
+    } else if (machine.milk < drink.milk) {
+        console.log("Sorry, not enough milk!");
+        return false;
+    } else if (machine.beans < drink.beans) {
+        console.log("Sorry, not enough coffee beans!");
+        return false;
+    } else if (machine.cups < 1) {
+        console.log("Sorry, not enough disposable cups!");
+        return false;
+    } else {
+        console.log("I have enough resources, making you a coffee!");
+        return true
+    }
+}
+
+
 function buy() {
     const choice = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n");
+    if (!hasEnoughResources(choice)) {
+        return
+    }
 
     if (choice === "1") {
         machine.cups--;
@@ -82,22 +114,25 @@ function take() {
 
 
 function main() {
-    printResources();
-
-    let action = input("Write action (buy, fill, take):\n");
-    switch (action) {
-        case "buy":
-            machine = buy();
-            printResources();
-            break;
-        case "fill":
-            fill();
-            printResources();
-            break;
-        case "take":
-            take();
-            printResources();
-            break;
+    while (true) {
+        let action = input("Write action (buy, fill, take, remaining, exit):\n");
+        switch (action) {
+            case "buy":
+                buy();
+                break;
+            case "fill":
+                fill();
+                break;
+            case "take":
+                take();
+                break;
+            case "remaining":
+                printResources();
+                break;
+            case "exit":
+                return
+        }
+        console.log();
     }
 }
 
